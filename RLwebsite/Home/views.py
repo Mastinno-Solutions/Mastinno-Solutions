@@ -35,4 +35,4 @@ def userlogin(request):
             context={'message':"The username or password you entered is incorrect."}
             return render(request, 'login.html',context)
 
-    return render(request, 'login.html')
+    return render(request, 'Login.html')
