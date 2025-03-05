@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+  {% load static %}
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css"
+    />
+    <link
+      href="https://api.mapbox.com/mapbox-gl-js/v2.1.1/mapbox-gl.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    <link rel="icon" type="image/x-icon" href="{% static 'img/favicon.ico' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <title>RapidLabs</title>
+  </head>
+  <style>
+    .carousel-control-prev,
+    .carousel-control-next {
+      top: 50%;
+      transform: translateY(-50%);
+      width: 50px; /* Adjust the width as needed */
+      height: 50px; /* Adjust the height as needed */
+      background-color: rgba(0, 0, 0, 0.5); /* Add a background color to the arrows */
+    }
+  
+    .carousel-control-prev {
+      left: -60px; /* Move the previous arrow to the left outside the image */
+    }
+  
+    .carousel-control-next {
+      right: -60px; /* Move the next arrow to the right outside the image */
+    }
+  
+    .carousel-indicators {
+      position: relative;
+      margin-top: 10px;
+    }
+  </style>
+  <body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg bg-light navbar-light py-3 fixed-top">
+      <div class="container">
+        <a href="{% url 'homepage' %}" class="navbar-brand">
+          <img src="{% static 'img/Name.png' %}" alt="Mastinno Logo" class="d-inline-block align-top" style="height: 40px;">
+        </a>
+    
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navmenu"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+    
+        <div class="collapse navbar-collapse" id="navmenu">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+              <a href="{% url 'homepage' %}" class="nav-link me-3">Home</a>
+
+            </li>
+            <li class="nav-item">
+              <a href="{% url 'about' %}" class="nav-link me-3">About us</a>
+
+            </li>
+            <li class="nav-item">
+              <a href="{% url 'product' %}" class="nav-link me-3">Products</a>
+              
+            </li>
+            <li class="nav-item">
+              <a href="{% url 'service' %}" class="nav-link me-3">Services</a>
+              
+            </li>
+            <li class="nav-item">
+              <a href="{% url 'outcome' %}" class="nav-link me-3">Outcomes</a>
+              
+            </li>
+            <li class="nav-item">
+              <a href="{% url 'contact' %}" class="nav-link me-3">Contact Us</a>
+             
+            </li>
+            <li class="nav-item">
+              <a href="{% url 'innovation' %}" class="btn btn-danger ps-5 pe-5" style="background-color: #c00000ff;">Innovation Lab</a>
+            </li>
+            
+          </ul>
+        </div>
+      </div>
+    </nav>
+    
+<section>
+  <div class="container my-5" > 
+    <h3 style="color: #c00000ff;">Contact Us</h3>
+    <p>We’re here to help and answer any questions you might have. We look forward to hearing from you.</p>
+       
+    <hr class="my-4" style="border: 2px solid #ff6666;">
+       
+      
+  </div>
+  <div class="container my-5">
+    <div class="row">
+      <div class="col-md-6">
+        <form>
+          <!-- Dropdown -->
+          <div class="mb-4">
+            <label for="helpType" class="form-label"><strong>What do you need help with?</strong></label>
+            <select id="helpType" class="form-select">
+              <option selected>Select an option</option>
+              <option value="1">Option 1</option>
+              <option value="2">Option 2</option>
+              <option value="3">Option 3</option>
+            </select>
+          </div>
+
+          <!-- Name and Email -->
+          <div class="row">
+            <div class="col-md-6 mb-4">
+              <label for="name" class="form-label"><strong>Name</strong></label>
+              <input type="text" class="form-control" id="name" placeholder="Your Name">
+            </div>
+            <div class="col-md-6 mb-4">
+              <label for="email" class="form-label"><strong>Email</strong></label>
+              <input type="email" class="form-control" id="email" placeholder="Your Email Address">
+            </div>
+          </div>
+
+          <!-- Company Name -->
+          <div class="mb-4">
+            <label for="companyName" class="form-label"><strong>Company Name</strong></label>
+            <input type="text" class="form-control" id="companyName" placeholder="Your Company Name">
+          </div>
+
+          <!-- Subject -->
+          <div class="mb-4">
+            <label for="subject" class="form-label"><strong>Subject</strong></label>
+            <input type="text" class="form-control" id="subject" placeholder="Subject">
+          </div>
+      </div>
+
+      <div class="col-md-6 d-none d-md-block ">
+        <img src="{% static 'img/contact us.jpg' %}" alt="Support Image" class="img-fluid">
+      </div>
+
+      <!-- Message Text Area - Spanning Full Width -->
+      <div class="col-12">
+        <!-- Message -->
+        <div class="mb-4">
+          <label for="message" class="form-label"><strong>How Can We Help?</strong></label>
+          <textarea class="form-control" id="message" rows="6" placeholder="Please Enter the Details of Your Request."></textarea>
+        </div>
+
+        <!-- File Upload -->
+        <div class="mb-4">
+          <label for="formFile" class="form-label">
+            <i class="fas fa-upload"></i> <strong>Upload File</strong>
+          </label>
+          <input class="form-control" type="file" id="formFile">
+        </div>
+
+        <!-- Submit Button -->
+        <div class="mb-4">
+          <button type="submit" class="btn btn-danger btn-lg"><strong>Submit</strong></button>
+        </div>
+
+        <!-- Typical Reply Time -->
+        <p class="text-muted">
+          <small>Typical reply time: within hours. Expect a reply between Mon-Fri: 24 hours, GMT+5:30 IST.</small>
+        </p>
+      </div>
+      </form>
+    </div>
+  </div>
+</section>
+
+
+
+ <!-- Footer -->
+ <footer class="bg-dark text-white">
+  <div class="container py-3">
+    <div class="row">
+      <div class="col-lg-9 col-md-8 col-sm-12 mb-3">
+        <img src="{% static 'img/Name.png' %}" alt="Mastinno Logo" class="d-inline-block align-top" style="height: 40px;">
+        <ul class="list-unstyled ms-lg-5 mt-3 mt-lg-0">
+          <li>
+            <a href="#" class="text-white no-underline" data-bs-toggle="modal" data-bs-target="#careersModal">
+              Careers - <span style="color:#c00000ff; font-size: 20px;">We are Hiring!</span>
+            </a>
+          </li> <li><a href="#" class="text-white no-underline">Inspiring Stories</a></li>
+          <li><a href="#" class="text-white no-underline">Our Policies</a></li>
+          <li><a href="#" class="text-white no-underline">Terms & Conditions</a></li>
+        </ul>
+      </div>
+      <div class="col-lg-3 col-md-4 col-sm-12 ms-auto">
+        <address class="small">
+          <p><i class="fas fa-map-marker-alt"></i>&nbsp;&nbsp; VR, Daavu Buchaiah Colony<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            1st Line, Opp. Anjaneya Swamy Temple<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  
+            Vijayawada 520008
+          </p>
+          <p><i class="fas fa-phone-alt"></i>&nbsp;&nbsp; Phone: +91-8106092310</p>
+          <p><i class="fas fa-envelope"></i>&nbsp;&nbsp; Email: support@rapidlabs.in</p>
+        </address>
+      </div>
+    </div>
+  </div>
+  <div class="bg-darker py-2" style="background-color: rgba(0, 0, 0, 0.2);">
+    <div class="container">
+      <p class="text-center mb-0">&copy; 2024 Mastinno</p>
+    </div>
+  </div>
+</footer>
+
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://api.mapbox.com/mapbox-gl-js/v2.1.1/mapbox-gl.js"></script>
+
+    <script>
+      mapboxgl.accessToken =
+        'pk.eyJ1IjoiYnRyYXZlcnN5IiwiYSI6ImNrbmh0dXF1NzBtbnMyb3MzcTBpaG10eXcifQ.h5ZyYCglnMdOLAGGiL1Auw'
+      var map = new mapboxgl.Map({
+        container: 'map',
+        style: 'mapbox://styles/mapbox/streets-v11',
+        center: [-71.060982, 42.35725],
+        zoom: 18,
+      })
+    </script>
+
+    <!-- Hiring Modal-->
+<div class="modal fade" id="careersModal" tabindex="-1" aria-labelledby="careersModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg"> <!-- Increased modal size -->
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="careersModalLabel" style="color: #c00000ff;font-weight: bold;">Careers at Mastinno</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form id="careerForm" action="/submit-application" method="POST" enctype="multipart/form-data">
+          <div class="row mb-3">
+            <div class="col-md-6">
+              <label for="name" class="form-label">Name</label>
+              <input type="text" class="form-control" id="name" name="name" required>
+            </div>
+            <div class="col-md-6">
+              <label for="email" class="form-label">Email</label>
+              <input type="email" class="form-control" id="email" name="email" required>
+            </div>
+          </div>
+
+          <div class="row mb-3">
+            <div class="col-md-6">
+              <label for="phone" class="form-label">Phone No</label>
+              <input type="tel" class="form-control" id="phone" name="phone" required>
+            </div>
+            <div class="col-md-6">
+              <label for="experience" class="form-label">Working Experience (in years)</label>
+              <input type="number" class="form-control" id="experience" name="experience" required>
+            </div>
+          </div>
+
+          <div class="row mb-3">
+            <div class="col-md-6">
+              <label for="products" class="form-label">Have you developed any products prior?</label>
+              <select class="form-select" id="products" name="products" required>
+                <option value="" disabled selected>Select an option</option>
+                <option value="yes">Yes</option>
+                <option value="no">No</option>
+              </select>
+            </div>
+            <div class="col-md-6">
+              <label for="resume" class="form-label">Upload Resume</label>
+              <input type="file" class="form-control" id="resume" name="resume" required>
+            </div>
+          </div>  
+
+          <div class="row mb-3">
+            <div class="col-md-6">
+              <label for="location" class="form-label">Location</label>
+              <input type="text" class="form-control" id="location" name="location" required>
+            </div>
+            <div class="col-md-6">
+              <label for="currentCTC" class="form-label">Current CTC</label>
+              <input type="text" class="form-control" id="currentCTC" name="currentCTC" required>
+            </div>
+          </div>
+
+          <div class="row mb-3">
+            <div class="col-md-6">
+              <label for="expectedCTC" class="form-label">Expected CTC</label>
+              <input type="text" class="form-control" id="expectedCTC" name="expectedCTC" required>
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <label for="bestProject" class="form-label">Describe Your Best Project</label>
+            <textarea class="form-control" id="bestProject" name="bestProject" rows="3" required></textarea>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="submit" form="careerForm" class="btn btn-danger" style="background-color:#c00000ff;">Submit Application</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<!--Hiring Modal-->
+  </body>
+</html>

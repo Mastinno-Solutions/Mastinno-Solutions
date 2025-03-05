@@ -1,0 +1,200 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RASLO</title>
+    <link rel="icon" type="image/x-icon" href="{% static 'img/favicon.ico' %}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: black;
+            padding-bottom: 60px;
+            overflow-y:hidden;
+        }
+
+        .header {
+            background-color: #ffffff;
+            padding: 10px;
+            margin-bottom: 20px;
+        }
+
+        .question-box {
+            background-color: #4a4a4a;
+            color: white;
+            padding: 15px;
+            margin-bottom: 20px;
+            
+        }
+
+        .question-box h6 {
+            margin: 0; /* Remove default margin */
+            text-align: center; /* Center text inside the <h6> */
+        }
+
+        .option {
+            background-color: #c4c4c4;
+            margin-bottom: 10px;
+            padding: 10px;
+            cursor: pointer;
+        }
+
+        .option:hover {
+            background-color: #e0e0e0;
+        }
+
+        .option input[type="radio"] {
+            display: none;
+        }
+
+        .option.selected {
+            background-color: #DC3545;
+            color: white;
+        }
+
+        .option-label {
+            display: block;
+            cursor: pointer;
+        }
+
+        .content-box {
+            background-color: white;
+            padding: 20px;
+            height:100%  !important;
+        }
+        .box{
+            min-height: 95vh;
+          
+        }
+       
+        @media (max-width: 767px) {
+            .order-md-last {
+                order: 2;
+            }
+
+            .order-md-first {
+                order: 1;
+            }
+        }
+
+        .scrollable-div {
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+
+        .fixed-bottom-buttons {
+            position: fixed;
+            bottom: 0;
+            left: 10;
+            width: 100%;
+            background-color: #ffffff;
+            padding: 10px;
+            box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container-fluid">
+        <!-- Header -->
+        <div class="row header bg-danger navbar navbar-expand-lg fixed-top">
+            <div class="col-4">
+                <h4 style='color:white;'>RASLO 2024</h4>
+            </div>
+            <div class="col-4 text-center">
+                <h4 style='color:white;'>Hi, {{ username }}</h4>
+            </div>
+            <div class="col-4 text-end">
+                <button class="btn btn-light btn-sm">Calculator</button>
+                <button class="btn btn-outline-light btn-sm ms-1">End Assessment</button>
+            </div>
+        </div>
+        
+        <div class="row py-5 my-3 pb-5 pe-2 box">
+            <!-- Content Box on the Left -->
+            <div class="col-md-8 order-md-first rounded">
+                <div class="content-box rounded">
+                    <h5>{{ topic }}</h5>
+                    <p>{{ content }}</p>
+                    {% if image %}
+                         <div style="text-align: center;">
+                        <img src="{{ image.url }}" alt="Question Image"> 
+                </div>
+                    {% endif %}
+
+                </div>
+            </div>
+    
+
+            <!-- Question Box on the Right -->
+            <div class="col-md-4 order-md-last rounded bg-light p-3">
+                <div class="question-box rounded">
+                    <h6>Question {{ question_number }}/{{ total_questions }}</h6>
+                </div>
+                <p style='font-weight:bold;'>{{ question }}</p>
+                <!-- MCQ Options with Radio Buttons -->
+                
+                    <div class="option rounded {% if selected_option == 'A' %}selected{% endif %}">
+                        <input type="radio" id="optionA" name="selected_option" value="A" {% if selected_option == 'A' %}checked{% endif %}>
+                        <label for="optionA" class="option-label">
+                            {{ option_a }}
+                        </label>
+                    </div>
+                    <div class="option rounded {% if selected_option == 'B' %}selected{% endif %}">
+                        <input type="radio" id="optionB" name="selected_option" value="B" {% if selected_option == 'B' %}checked{% endif %}>
+                        <label for="optionB" class="option-label">
+                            {{ option_b }}
+                        </label>
+                    </div>
+                    <div class="option rounded {% if selected_option == 'C' %}selected{% endif %}">
+                        <input type="radio" id="optionC" name="selected_option" value="C" {% if selected_option == 'C' %}checked{% endif %}>
+                        <label for="optionC" class="option-label">
+                            {{ option_c }}
+                        </label>
+                    </div>
+                    <div class="option rounded {% if selected_option == 'D' %}selected{% endif %}">
+                        <input type="radio" id="optionD" name="selected_option" value="D" {% if selected_option == 'D' %}checked{% endif %}>
+                        <label for="optionD" class="option-label">
+                            {{ option_d }}
+                        </label>
+                    </div>
+                   
+            
+            </div>
+        </div>
+
+        <div class="row fixed-bottom-buttons ps-5 pe-5">
+            <div class="col-6">
+                <a href="{{ prev_url }}" class="btn btn-danger w-40">Previous</a>
+            </div>
+            <div class="col-6 text-end">
+                <a href="{{ next_url }}" class="btn btn-danger w-40">Next</a>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // JavaScript to add 'selected' class to the chosen option
+        document.querySelectorAll('.option').forEach(option => {
+            option.addEventListener('click', function () {
+                document.querySelectorAll('.option').forEach(opt => opt.classList.remove('selected'));
+                this.classList.add('selected');
+                // Ensure radio button corresponding to the clicked option is checked
+                const input = this.querySelector('input[type="radio"]');
+                if (input) {
+                    input.checked = true;
+                }
+            });
+        });
+    </script>
+    <script>
+        console.log("Image URL:", "{{ image.url }}");
+        console.log("Question:", "{{ question }}");
+        console.log("Content:", "{{ content }}");
+    </script>
+</body>
+
+</html>

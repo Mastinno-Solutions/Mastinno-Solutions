@@ -1,0 +1,193 @@
+{% extends 'Main.html' %}
+
+{% block content %}
+{% load static %}
+    <section>
+      <div class="container my-5 " > 
+        <h3 style="color: #c00000ff;" class="text-center ">"Affordable Prototyping & Manufacturing Services"</h3>
+        
+      
+        <hr class="my-4" style="border: 2px solid #ff6666;">
+           
+          
+      </div>
+      
+    </section>
+
+
+<section>
+  <div class="container my-5">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-9">
+          <ul class="nav nav-tabs">
+            <li class="nav-item">
+              <a class="nav-link text-danger active" href="#">3D Printing</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-danger" href="#">CNC Machining</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-danger" href="#">PCB/PCBA</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-danger" href="#">SMT Stencil</a>
+            </li>
+          </ul>
+          
+          <div class="mt-3 text-center p-4 bg-light border rounded">
+            <button class="btn btn-danger btn-lg" style="background-color: rgb(214, 84, 84);color: white;">
+              <i class="fas fa-upload"></i> Add 3D Files
+            </button>
+            <p class="mt-2 mb-0"><small>Wall thickness:≥1.2mm; thinnest part:≥0.8mm; hole size:≥1.5mm Supported files: STL, STP, and more...</small></p>
+            <p class="mb-0"><small><i class="fas fa-lock"></i> All uploads are secure and confidential.</small></p>
+          </div>
+          
+          <div class="alert alert-warning mt-3" role="alert">
+            <small><i class="fas fa-exclamation-circle"></i>Done.</small>
+          </div> 
+          
+          <form class="mt-3">
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" id="selectAll">
+              <label class="form-check-label" for="selectAll">Select All (1)</label>
+            </div>
+            
+            <div class="card mt-2">
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-md-3">
+                    
+                  </div>
+                  <div class="col-md-9">
+                    <div class="form-group row">
+                      <label class="col-sm-3 col-form-label">3D Technology</label>
+                      <div class="col-sm-9">
+                        <div class="btn-group btn-group-sm" role="group">
+                          <button type="button" class="btn  active" style="background-color: rgb(214, 84, 84);color: white;">SLA(Resin)</button>
+                          <button type="button" class="btn btn-outline-danger" >MJF(Nylon)</button>
+                          <button type="button" class="btn btn-outline-danger">FDM(Plastic)</button>
+                          
+                        </div>
+                      </div>
+                    </div>
+                    
+                    <div class="form-group row">
+                      <label class="col-sm-3 col-form-label">Material</label>
+                      <div class="col-sm-9">
+                        <div class="btn-group btn-group-sm" role="group">
+                          <button type="button" class="btn btn-outline-danger active" style="background-color: rgb(214, 84, 84);color: white;">LEDO 8860 Resin</button>
+                          <button type="button" class="btn btn-outline-danger">8228 Resin</button>
+                          <button type="button" class="btn btn-outline-danger">Black Resin</button>
+                          <button type="button" class="btn btn-outline-danger">Imagine Black</button>
+                        </div>
+                      </div>
+                    </div>
+                    
+                    <div class="form-group row">
+                      <label class="col-sm-3 col-form-label">Color</label>
+                      <div class="col-sm-9">
+                        <button type="button" class="btn btn-outline-danger btn-sm active" style="background-color: rgb(214, 84, 84);color: white;">Natural White</button>
+                      </div>
+                    </div>
+                    
+                    <div class="form-group row">
+                      <label class="col-sm-3 col-form-label">Surface Finish</label>
+                      <div class="col-sm-9">
+                        <div class="btn-group btn-group-sm" role="group">
+                          <button type="button" class="btn btn-outline-dangeractive" style="background-color: rgb(214, 84, 84);color: white;">Yes</button>
+                          <button type="button" class="btn btn-outline-danger" >No</button>
+                        </div>
+                        <select class="form-control form-control-sm d-inline-block w-auto ml-2">
+                          <option>Sanding</option>
+                        </select>
+                        <select class="form-control form-control-sm d-inline-block w-auto ml-2">
+                          <option>General Sand</option>
+                        </select>
+                        <button type="button" class="btn btn-outline-danger btn-sm ml-2">+ Add</button>
+                      </div>
+                    </div>
+                    
+                    <div class="form-group row">
+                      <label class="col-sm-3 col-form-label">Build Time</label>
+                      <div class="col-sm-9">
+                        <input type="text" class="form-control form-control-sm w-auto" value="48 hours">
+                      </div>
+                    </div>
+                    
+                    <div class="form-group row">
+                      <label class="col-sm-3 col-form-label">Qty</label>
+                      <div class="col-sm-9">
+                        <input type="number" class="form-control form-control-sm w-auto" value="1">
+                      </div>
+                    </div>
+                    
+                    <div class="form-group row">
+                      <label class="col-sm-3 col-form-label">Product Desc</label>
+                      <div class="col-sm-9">
+                        <select class="form-control form-control-sm w-auto">
+                          <option>Select</option>
+                        </select>
+                      </div>
+                    </div>
+                    
+                    <div class="form-group row">
+                      <label class="col-sm-3 col-form-label">Price</label>
+                      <div class="col-sm-9">
+                        <p class="form-control-plaintext">INR 2500</p>
+                      </div>
+                    </div>
+                    
+                    <div class="form-group row">
+                      <label class="col-sm-3 col-form-label">3D Remark</label>
+                      <div class="col-sm-9">
+                        <input type="text" class="form-control form-control-sm">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+        
+        <div class="col-md-3">
+          <div class="card">
+            <div class="card-header">
+              Charge Details
+            </div>
+            <div class="card-body">
+              <p class="font-weight-bold">Total Price <span class="float-right">INR 2500.00</span></p>
+              <small class="text-muted">Additional charges may apply for special orders</small>
+              <p class="mt-2 mb-0"><small>Weight: 0.19 kg</small></p>
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" checked id="agreeTerms">
+                <label class="form-check-label" for="agreeTerms">
+                  <small>I agree to Rapid Labs terms of use</small>
+                </label>
+              </div>
+              <button class="btn btn-danger  btn-block mt-3" style="background-color: rgb(214, 84, 84);color: white;">Place Order</button>
+            </div>
+          </div>
+          
+          <div class="card mt-3">
+            <div class="card-header">
+              Shipping Estimate
+            </div>
+            <div class="card-body">
+              <p class="mb-0"><strong>Express</strong></p>
+              <p>2-4 business days</p>
+              <p class="font-weight-bold mb-0"></p>INR 3000.00</p>
+            </div>
+          </div>
+          
+          <div class="mt-3">
+            <small><strong>Coupons</strong> <a href="#" class="float-right">View your coupons</a></small>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  {% endblock %}
