@@ -1,0 +1,73 @@
+{% extends 'Main.html' %}
+
+{% block content %}
+<section>
+  <div class="container my-5">
+    <h3 style="color: #c00000ff;">Checkout</h3>
+    <p>Review your cart and proceed with the payment process.</p>
+    <hr class="my-4" style="border: 2px solid #ff6666;">
+  </div>
+</section>
+
+<div class="container">
+  <div class="row">
+    <div class="col-lg-8">
+      <!-- Cart Items -->
+      <div class="table-responsive">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>Product</th>
+              <th>Price</th>
+              <th>Quantity</th>
+              <th>Total</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for product in cart_items %}
+            <tr>
+              <td>
+                <div class="d-flex align-items-center">
+                  <img src="{{ product.image.url }}" alt="{{ product.product_name }}" style="max-width: 100px; max-height: 100px; border-radius: 5px;" class="me-3">
+                  <div>
+                    <h6 class="mb-1">{{ product.product_name }}</h6>
+                  </div>
+                </div>
+              </td>
+              <td>{{ product.price }} INR</td>
+              <td>1</td>  <!-- Assuming 1 quantity for now -->
+              <td>{{ product.price }} INR</td> <!-- Total price is the same as price here -->
+            </tr>
+            {% empty %}
+            <tr>
+              <td colspan="4" class="text-center">No items in cart</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="col-lg-4">
+      <!-- Checkout Summary -->
+      <div class="card shadow-sm">
+        <div class="card-body">
+          <h5 class="card-title">Order Summary</h5>
+          <hr>
+          <div class="d-flex justify-content-between">
+            <span><strong>Total Price:</strong></span>
+            <span>{{ total_price }} INR</span>
+          </div>
+          <hr>
+          <div class="d-grid gap-2">
+            <form method="POST">
+              {% csrf_token %}
+              <button type="submit" class="btn btn-success">Proceed to Payment</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
