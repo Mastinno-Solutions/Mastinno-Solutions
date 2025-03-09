@@ -1,73 +1,83 @@
-{% extends 'Main.html' %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Tracking</title>
+    <!-- <link rel="stylesheet" href="{% static 'css/styles.css' %}"> -->
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 font-sans antialiased">
 
-{% block content %}
-<section>
-  <div class="container my-5">
-    <h3 style="color: #c00000ff;">Checkout</h3>
-    <p>Review your cart and proceed with the payment process.</p>
-    <hr class="my-4" style="border: 2px solid #ff6666;">
-  </div>
-</section>
+<div class="container mx-auto p-6">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
 
-<div class="container">
-  <div class="row">
-    <div class="col-lg-8">
-      <!-- Cart Items -->
-      <div class="table-responsive">
-        <table class="table table-striped">
-          <thead>
-            <tr>
-              <th>Product</th>
-              <th>Price</th>
-              <th>Quantity</th>
-              <th>Total</th>
-            </tr>
-          </thead>
-          <tbody>
-            {% for product in cart_items %}
-            <tr>
-              <td>
-                <div class="d-flex align-items-center">
-                  <img src="{{ product.image.url }}" alt="{{ product.product_name }}" style="max-width: 100px; max-height: 100px; border-radius: 5px;" class="me-3">
-                  <div>
-                    <h6 class="mb-1">{{ product.product_name }}</h6>
-                  </div>
+        <div class="bg-white p-6 shadow-lg rounded-lg">
+            <h2 class="text-2xl font-bold text-gray-700 flex items-center gap-2 mb-3">
+                🛍️ Order Summary
+            </h2>
+            <hr class="mb-3">
+
+            {% for item in cart_items %}
+            <div class="flex items-center gap-5 py-3 border-b last:border-none">
+                <img src="{{ item.image }}" alt="{{ item.name }}" class="w-20 h-20 object-cover rounded-lg shadow">
+                <div class="flex-1">
+                    <p class="text-lg font-medium text-gray-800">{{ item.product_name }}</p>
+                    <p class="text-gray-600">₹{{ item.price }} x {{ item.quantity }}</p>
                 </div>
-              </td>
-              <td>{{ product.price }} INR</td>
-              <td>1</td>  <!-- Assuming 1 quantity for now -->
-              <td>{{ product.price }} INR</td> <!-- Total price is the same as price here -->
-            </tr>
-            {% empty %}
-            <tr>
-              <td colspan="4" class="text-center">No items in cart</td>
-            </tr>
+                <p class="ml-auto text-lg font-semibold text-blue-600 item-total" 
+                   data-price="{{ item.price }}" data-quantity="{{ item.quantity }}">
+                  ₹{{ item.price|floatformat:2 }}
+                </p>
+            </div>
             {% endfor %}
-          </tbody>
-        </table>
-      </div>
-    </div>
 
-    <div class="col-lg-4">
-      <!-- Checkout Summary -->
-      <div class="card shadow-sm">
-        <div class="card-body">
-          <h5 class="card-title">Order Summary</h5>
-          <hr>
-          <div class="d-flex justify-content-between">
-            <span><strong>Total Price:</strong></span>
-            <span>{{ total_price }} INR</span>
-          </div>
-          <hr>
-          <div class="d-grid gap-2">
-            <form method="POST">
-              {% csrf_token %}
-              <button type="submit" class="btn btn-success">Proceed to Payment</button>
-            </form>
-          </div>
+            <div class="mt-5 text-lg">
+                <div class="flex justify-between text-gray-700">
+                    <span>Subtotal:</span> <span id="subtotal" class="font-semibold"></span>
+                </div>
+                <div class="flex justify-between text-gray-600">
+                    <span>Tax (5%):</span> <span id="tax"></span>
+                </div>
+                <div class="flex justify-between text-gray-500">
+                    <span>Discount:</span> <span id="discount">- ₹50.00</span>
+                </div>
+                <hr class="my-3">
+                <div class="flex justify-between font-bold text-gray-800 text-xl">
+                    <span>Total:</span> <span id="total" class="text-blue-600"></span>
+                </div>
+            </div>
+
+            <button class="w-full mt-5 bg-gradient-to-r from-blue-500 to-indigo-600 
+                           text-white py-3 rounded-lg shadow-md transition-transform transform hover:scale-105 active:scale-95">
+                           Track Order
+            </button>
         </div>
-      </div>
+
+        <div class="bg-white p-6 shadow-lg rounded-lg">
+            <h2 class="text-2xl font-bold text-gray-700">📦 Order Details</h2>
+            <hr class="my-3" />
+            
+            <div class="space-y-3">
+                <p class="text-lg text-gray-700">📅 Order Date: <strong>Jul 29, 2024</strong></p>
+                <p class="text-lg text-gray-700">🔢 Tracking Number: <strong>AUP12434-45</strong></p>
+                
+                <div class="relative pt-1">
+                    <div class="overflow-hidden h-2 mb-4 text-xs flex rounded bg-gray-200">
+                        <div class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-green-500 transition-all duration-700" style="width: 70%">
+                        </div>
+                    </div>
+                    <p class="text-lg text-green-500 font-semibold">🛒 In Progress</p>
+                </div>
+                
+                <button class="w-full mt-3 bg-gray-600 text-white py-3 rounded-lg shadow-md hover:bg-gray-700 transition-transform transform hover:scale-105">
+                    📄 Download Invoice
+                </button>
+            </div>
+        </div>
     </div>
-  </div>
 </div>
-{% endblock %}
+<script src="{% static 'js/cart.js' %}"></script>
+</body>
+</html>

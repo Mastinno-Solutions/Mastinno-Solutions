@@ -90,9 +90,9 @@ def remove_from_cart(request, product_name):
 
 @login_required
 def checkout(request):
-    cart_items_ids = request.session.get('cart', [])
-    cart_items = Product.objects.filter(id__in=cart_items_ids)
-    total_price = sum(product.price for product in cart_items)
+    cart_items = request.session.get('cart_items', [])  # Retrieve from session
+    total_price = sum(item['price'] * item['quantity'] for item in cart_items)  # Calculate total price
+
     return render(request, 'checkout.html', {
         'cart_items': cart_items,
         'total_price': total_price,
@@ -106,3 +106,4 @@ def complete_checkout(request):
 @login_required
 def order_success(request):
     return render(request, 'order_success.html')
+
