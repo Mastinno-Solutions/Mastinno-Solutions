@@ -60,15 +60,13 @@
         <div class="text-center mt-3">
             <a href="#" class="text-decoration-none">Forgot Password?</a>
         </div>
-
         <hr>
-
         <!-- Google Login Button -->
         <div class="text-center">
             <form action="{% url 'social:begin' 'google-oauth2' %}" method="post">
                 {% csrf_token %}
                 <button type="submit" class="google-btn">
-                    <img src="{% static 'img/google-icon.png' %}" alt="Google Logo"> Sign in with Google
+                    <img src="{% static 'img/googlelogo.webp' %}" alt="Google Logo"> Sign in with Google
                 </button>
             </form>
         </div>
